@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div id="todo-container">
+    <ul>
+        {% for todo in todos %}
+
+        <li hx-target="#todo-container" hx-swap="outerHTML" {% if todo.done %} class="line-through" {% endif %}>
+            <input type="checkbox" hx-put="{{ url_for('update_todo', id=todo.id) }}" hx_trigger="change" {% if todo.done
+                %} checked {% endif %}>
+            {{ todo.task }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <form hx-target="#todo-container" hx-swap="outerHTML" hx-post="{{url_for('create_todo')}}">
+        <input type="text" name="task" placeholder="New todo...">
+        <button type="submit">Submit</button>
+        <button hx-delete="{{url_for('delete_completed')}}">Clear Completed</button>
+    </form>
+</div>
+
+{% endblock %}
