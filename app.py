@@ -15,7 +15,7 @@ todos = [
     },
     {
         "id": 3,
-        "task": "Poop",
+        "task": "Get groceries",
         "done": True
     }
 ]
